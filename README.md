@@ -1,5 +1,7 @@
 # Share Value Frontend Assessment
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7c041ba6-3c9e-4c99-8680-1fed87ea026b/deploy-status)](https://app.netlify.com/sites/extraordinary-kheer-79a146/deploys)
+
 This site is built with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -69,11 +71,12 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 
 - [x] Set up the repository
 - [x] Install Vue boilerplate
-- [] Create Netlify environment
+- [x] Create Netlify environment
 - [] Add the necessary pages
 - [] Create necessary components
-  - [] Buttons
-  - [] Inputs
+  - [x] Flight search input component
+  - [] Flight listing component
 - [] Add dummy data
-  - [] Available airports
+  - [x] Available airports
   - [] Available flights given parameters
+- [] Add vue3-simple-typeahead instead of inputs for airport fields
