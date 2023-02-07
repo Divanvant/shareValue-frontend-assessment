@@ -1,26 +1,40 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import type { TFlightSearchParams } from "@/types";
+import { getSupportedAirports } from "@/assets/skyscannerData";
 
-type FlightSearchParams = {
-  departureAirport: string;
-  departureDate: string;
-  arrivalAirport: string;
-  numberOfPassengers: number;
-};
-const flightSearchParams = ref<FlightSearchParams>({
-  departureAirport: "",
-  departureDate: "",
-  arrivalAirport: "",
-  numberOfPassengers: 0,
+const emit = defineEmits<{
+  (e: "searchForFlights", props: TFlightSearchParams): void;
+}>();
+
+const flightSearchParams = ref<TFlightSearchParams>({
+  departureAirport: "AMS",
+  arrivalAirport: "EIN",
+  departureDate: "2023-02-07",
+  numberOfPassengers: 1,
 });
+
+const currentDate = new Date().toISOString().split("T")[0];
+const airports = getSupportedAirports();
 
 const flightSearch = () => {
   const {
     departureAirport,
-    departureDate,
     arrivalAirport,
+    departureDate,
     numberOfPassengers,
   } = flightSearchParams.value;
+
+  if (departureAirport === arrivalAirport) {
+    alert("Please select different locations for your flight");
+    return;
+  }
+
+  if (departureDate == "") {
+    alert("Please select a date for your flight");
+    return;
+  }
+
   // Search for available flights
   console.log(
     `Searching for flights from ${departureAirport} to ${arrivalAirport} on ${departureDate} for you${
@@ -29,6 +43,8 @@ const flightSearch = () => {
         : ""
     }`
   );
+
+  emit("searchForFlights", flightSearchParams.value);
 };
 </script>
 
@@ -36,24 +52,38 @@ const flightSearch = () => {
   <form @submit.prevent="flightSearch">
     <label for="departureAirport">
       <span>Departure Airport</span>
-      <input
+      <select
         id="departureAirport"
-        type="text"
         name="departureAirport"
-        placeholder="Departure Airport"
         v-model="flightSearchParams.departureAirport"
-      />
+      >
+        <option disabled value="">From</option>
+        <option
+          v-for="airport in airports"
+          :key="airport.Id"
+          :value="airport.Id"
+        >
+          {{ airport.Name }}
+        </option>
+      </select>
     </label>
 
     <label for="departureAirport">
       <span>Arrival Airport</span>
-      <input
+      <select
         id="arrivalAirport"
-        type="text"
         name="arrivalAirport"
-        placeholder="Arrival Airport"
         v-model="flightSearchParams.arrivalAirport"
-      />
+      >
+        <option disabled value="">To</option>
+        <option
+          v-for="airport in airports"
+          :key="airport.Id"
+          :value="airport.Id"
+        >
+          {{ airport.Name }}
+        </option>
+      </select>
     </label>
 
     <label for="departureDate">
@@ -62,6 +92,7 @@ const flightSearch = () => {
         id="departureDate"
         type="date"
         name="departureDate"
+        :min="currentDate"
         v-model="flightSearchParams.departureDate"
       />
     </label>
@@ -73,6 +104,7 @@ const flightSearch = () => {
         type="number"
         name="passengers"
         v-model="flightSearchParams.numberOfPassengers"
+        min="1"
       />
     </label>
 

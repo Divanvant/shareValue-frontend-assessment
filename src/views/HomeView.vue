@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { getSupportedAirports } from "@/assets/skyscannerData";
+import FlightListingItem from "@/components/FlightListingItem.vue";
 import FlightSearch from "@/components/FlightSearch.vue";
-
 import { copy } from "@/translations";
+import type { TFlightListing, TFlightSearchParams } from "@/types";
 
 const availableAirports = [
   {
@@ -38,6 +41,36 @@ const availableAirports = [
     carriers: "27",
   },
 ];
+
+const availableFlights = ref<TFlightListing[]>([]);
+const flightLocations = ref<string[]>([]);
+
+const searchForFlights = (props: TFlightSearchParams) => {
+  const currentDepartureAirport = getSupportedAirports().find(
+    (item) => item.Id === props.departureAirport
+  );
+  const currentArrivalAirport = getSupportedAirports().find(
+    (item) => item.Id === props.arrivalAirport
+  );
+  flightLocations.value = [
+    currentDepartureAirport?.Name || "",
+    currentArrivalAirport?.Name || "",
+  ];
+
+  // @todo get flights
+  availableFlights.value = [
+    {
+      id: "1",
+      airline: "KLM",
+      flightNumber: "KL598",
+      price: "100€",
+      departureDateTime: "2023-03-03T00:40",
+      arrivalDateTime: "2023-03-03T11:40",
+      departureAirport: currentDepartureAirport?.Name || "",
+      arrivalAirport: currentArrivalAirport?.Name || "",
+    },
+  ];
+};
 </script>
 
 <template>
@@ -45,10 +78,26 @@ const availableAirports = [
     <h1>{{ copy.homePage.heading }}</h1>
     <p>{{ copy.homePage.blurb }}</p>
 
-    <FlightSearch />
+    <FlightSearch @searchForFlights="searchForFlights" />
   </main>
 
-  <AvailableFlights />
+  <section v-if="availableFlights.length">
+    <h2>
+      Showing flights from {{ flightLocations[0] }} to {{ flightLocations[1] }}
+    </h2>
+    <div v-for="flight in availableFlights" :key="flight.id">
+      <FlightListingItem
+        :id="flight.id"
+        :airline="flight.airline"
+        :flightNumber="flight.flightNumber"
+        :price="flight.price"
+        :departureDateTime="flight.departureDateTime"
+        :arrivalDateTime="flight.arrivalDateTime"
+        :departureAirport="flight.departureAirport"
+        :arrivalAirport="flight.arrivalAirport"
+      />
+    </div>
+  </section>
 
   <section>
     <h2>Popular Destinations</h2>
