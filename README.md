@@ -72,7 +72,7 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 - [x] Set up the repository
 - [x] Install Vue boilerplate
 - [x] Create Netlify environment
-- [] Add the necessary pages
+- [x] Add the necessary pages
 - [] Create necessary components
   - [x] Flight search input component
   - [] Flight listing component
