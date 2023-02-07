@@ -73,10 +73,10 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 - [x] Install Vue boilerplate
 - [x] Create Netlify environment
 - [x] Add the necessary pages
-- [] Create necessary components
+- [x] Create necessary components
   - [x] Flight search input component
   - [x] Flight listing component
-- [] Add dummy data
+- [x] Add dummy data
   - [x] Available airports
-  - [] Available flights given parameters
+  - [x] Available flights given parameters
 - [] Add vue3-simple-typeahead instead of inputs for airport fields

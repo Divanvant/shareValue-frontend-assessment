@@ -8,6 +8,7 @@ defineProps<{
   arrivalDateTime: string;
   departureAirport: string;
   arrivalAirport: string;
+  showBookButton?: boolean;
 }>();
 
 const getDepartureDate = (dateTime: string) => {
@@ -62,7 +63,8 @@ const getDepartureTime = (dateTime: string) => {
       </h4>
 
       <a
-        :href="`/flight-details/${id}?departure=${'CPT'}&arrival=${'AMS'}`"
+        v-if="showBookButton"
+        :href="`/flight-details/${id}?departure=${'CPT'}&arrival=${'AMS'}&departureDate=${departureDateTime}`"
         class="button"
         >Book Now</a
       >
@@ -73,24 +75,32 @@ const getDepartureTime = (dateTime: string) => {
 <style scoped>
 .flight-listing {
   padding: calc(var(--spacing) * 4) calc(var(--spacing) * 8);
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--secondary-color);
   border-radius: var(--spacing);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: calc(var(--spacing) * 8);
 }
 .flight-listing:hover {
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
-.price-column {
-  text-align: right;
-}
-
 .price-column h4 {
   margin-top: 0;
   font-size: 1.5rem;
+}
+
+@media (min-width: 960px) {
+  .flight-listing {
+    align-items: center;
+    flex-flow: row nowrap;
+  }
+  .price-column {
+    text-align: right;
+  }
 }
 </style>

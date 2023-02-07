@@ -1,31 +1,12 @@
-<script setup lang="ts">
-import { onMounted, ref } from "vue";
-
-onMounted(() => {
-  const pathParts = window.location.pathname.split("/");
-  const flightId = pathParts[pathParts.length - 1];
-  if (flightId) {
-    console.log("get flight info");
-  }
-  console.log("show error");
-  // show/route to error page
-});
-
-const flight = ref({
-  departureAirport: "",
-  arrivalAirport: "",
-  airline: "",
-  flightNumber: "",
-  price: "",
-  departureDateTime: "",
-  returnDateTime: "",
-  totalTime: "",
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <main>
-    <h1>Flight from {{ flight.departureAirport }} to {{ flight.airline }}</h1>
-    <h3>Operated by {{ flight.airline }}</h3>
-  </main>
+  <div class="page-wrapper container text-center">
+    <main>
+      <h1>Your flight has been booked</h1>
+      <h3>Check your email for more details</h3>
+
+      <a href="/" class="button">Book Another flight</a>
+    </main>
+  </div>
 </template>

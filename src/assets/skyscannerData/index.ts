@@ -77,7 +77,7 @@ export const getFlights = (
   arrival?: string
 ): Promise<TFlightListing[]> => {
   return new Promise((resolve, reject) => {
-    loadJSON(`flights-${departure || "CPT"}-${arrival || "AMS"}.json`)
+    loadJSON(`/flights-${departure || "CPT"}-${arrival || "AMS"}.json`)
       .then((data: any) => {
         const allFlights = data.Quotes.map((quote: TSkyScannerQuote) => {
           const id = quote.QuoteId.toString();
@@ -117,7 +117,8 @@ export const getFlights = (
         resolve(flights);
       })
       .catch((error) => {
-        reject("Something went wrong", error);
+        console.log(error);
+        reject("Something went wrong");
       });
   });
 };
