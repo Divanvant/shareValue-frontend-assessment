@@ -58,7 +58,7 @@ const searchForFlights = (props: TFlightSearchParams) => {
   ];
 
   // @todo pass in parameters to filter with
-  getFlights().then((data) => {
+  getFlights(props.departureDate).then((data) => {
     availableFlights.value = data;
   });
 };

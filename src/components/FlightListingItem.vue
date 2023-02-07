@@ -61,7 +61,11 @@ const getDepartureTime = (dateTime: string) => {
         </span>
       </h4>
 
-      <a :href="`/flight-details/${id}`" class="button">Book Now</a>
+      <a
+        :href="`/flight-details/${id}?departure=${'CPT'}&arrival=${'AMS'}`"
+        class="button"
+        >Book Now</a
+      >
     </div>
   </div>
 </template>

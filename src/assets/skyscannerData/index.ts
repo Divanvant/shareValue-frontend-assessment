@@ -71,12 +71,16 @@ const getAirportName = (placeId: number, places: TSkyScannerPlace[]) => {
   return place?.Name || "";
 };
 
-export const getFlights = (): Promise<TFlightListing[]> => {
+export const getFlights = (
+  date: string,
+  departure?: string,
+  arrival?: string
+): Promise<TFlightListing[]> => {
   return new Promise((resolve, reject) => {
-    loadJSON("flights-CPT-AMS.json")
+    loadJSON(`flights-${departure || "CPT"}-${arrival || "AMS"}.json`)
       .then((data: any) => {
-        const flights = data.Quotes.map((quote: TSkyScannerQuote) => {
-          const id = quote.QuoteId;
+        const allFlights = data.Quotes.map((quote: TSkyScannerQuote) => {
+          const id = quote.QuoteId.toString();
           const airline = getAirlineName(
             quote.OutboundLeg.CarrierIds[0],
             data.Carriers
@@ -105,6 +109,10 @@ export const getFlights = (): Promise<TFlightListing[]> => {
             arrivalAirport,
           };
         });
+
+        const flights = allFlights.filter((flight: TFlightListing) =>
+          flight.departureDateTime.includes(date)
+        );
 
         resolve(flights);
       })

@@ -8,8 +8,8 @@ const emit = defineEmits<{
 }>();
 
 const flightSearchParams = ref<TFlightSearchParams>({
-  departureAirport: "AMS",
-  arrivalAirport: "EIN",
+  departureAirport: "CPT",
+  arrivalAirport: "AMS",
   departureDate: "2023-02-07",
   numberOfPassengers: 1,
 });
