@@ -76,13 +76,15 @@ const flightSearch = () => {
         v-model="flightSearchParams.arrivalAirport"
       >
         <option disabled value="">To</option>
-        <option
+        <!-- <option
           v-for="airport in airports"
           :key="airport.Id"
           :value="airport.Id"
         >
           {{ airport.Name }}
-        </option>
+        </option> -->
+        <option value="AMS">Amsterdam</option>
+        -->
       </select>
     </label>
 
