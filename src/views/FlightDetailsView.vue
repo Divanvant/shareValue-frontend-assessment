@@ -70,8 +70,6 @@ const confirmFlightDetails = () => {
   }
   errorText.value = "";
 
-  alert("Booking your flight");
-
   router.push({
     path: `/flight-confirmation/${
       flightId.value
@@ -108,59 +106,75 @@ const confirmFlightDetails = () => {
       />
     </main>
     <form @submit.prevent="confirmFlightDetails">
-      <label for="passengerName">
-        <span>Passenger Name</span>
-        <input
-          id="passengerName"
-          type="text"
-          name="passengerName"
-          placeholder="Passenger Name"
-          v-model="flightDetails.passengerName"
-        />
-      </label>
+      <div class="form-row">
+        <div class="form-column">
+          <label for="passengerName">
+            <span>Passenger Name</span>
+            <input
+              id="passengerName"
+              type="text"
+              name="passengerName"
+              placeholder="Passenger Name"
+              v-model="flightDetails.passengerName"
+            />
+          </label>
+        </div>
 
-      <label for="passportNumber">
-        <span>Passport Number</span>
-        <input
-          id="passportNumber"
-          type="text"
-          name="passportNumber"
-          placeholder="Passport Number"
-          v-model="flightDetails.passportNumber"
-        />
-      </label>
+        <div class="form-column">
+          <label for="passportNumber">
+            <span>Passport Number</span>
+            <input
+              id="passportNumber"
+              type="text"
+              name="passportNumber"
+              placeholder="Passport Number"
+              v-model="flightDetails.passportNumber"
+            />
+          </label>
+        </div>
+      </div>
 
-      <label for="dateOfBirth">
-        <span>Date of birth</span>
-        <input
-          id="dateOfBirth"
-          type="date"
-          name="dateOfBirth"
-          v-model="flightDetails.dateOfBirth"
-        />
-      </label>
+      <div class="form-row">
+        <div class="form-column">
+          <label for="dateOfBirth">
+            <span>Date of birth</span>
+            <input
+              id="dateOfBirth"
+              type="date"
+              name="dateOfBirth"
+              v-model="flightDetails.dateOfBirth"
+            />
+          </label>
+        </div>
 
-      <label for="phoneNumber">
-        <span>Phone Number</span>
-        <input
-          id="phoneNumber"
-          type="phone"
-          name="phoneNumber"
-          placeholder="Phone Number"
-          v-model="flightDetails.phone"
-        />
-      </label>
+        <div class="form-column">
+          <label for="phoneNumber">
+            <span>Phone Number</span>
+            <input
+              id="phoneNumber"
+              type="phone"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              v-model="flightDetails.phone"
+            />
+          </label>
+        </div>
+      </div>
 
-      <label for="email">
-        <span>Email address</span>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Email address"
-          v-model="flightDetails.email"
-        />
-      </label>
+      <div class="form-row">
+        <div class="form-column">
+          <label for="email">
+            <span>Email address</span>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email address"
+              v-model="flightDetails.email"
+            />
+          </label>
+        </div>
+      </div>
 
       <div v-if="errorText !== ''" class="error">
         {{ errorText }}
@@ -172,6 +186,18 @@ const confirmFlightDetails = () => {
 </template>
 
 <style scoped>
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-column {
+  flex: 1;
+  width: 100%;
+  margin-bottom: calc(var(--spacing) * 4);
+}
 .back-button {
   padding: calc(var(--spacing) * 4) 0;
 }
@@ -181,5 +207,18 @@ form > label {
 form > label > span {
   margin-top: calc(var(--spacing) * 4);
   display: block;
+}
+
+@media (min-width: 960px) {
+  .form-row {
+    flex-flow: row nowrap;
+  }
+  .form-column {
+    width: 50%;
+  }
+
+  .form-column:not(:last-child) label {
+    padding-right: calc(var(--spacing) * 4);
+  }
 }
 </style>
