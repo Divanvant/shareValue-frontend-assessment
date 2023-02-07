@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { getSupportedAirports } from "@/assets/skyscannerData";
+import { getSupportedAirports, getFlights } from "@/assets/skyscannerData";
 import FlightListingItem from "@/components/FlightListingItem.vue";
 import FlightSearch from "@/components/FlightSearch.vue";
 import { copy } from "@/translations";
@@ -57,19 +57,10 @@ const searchForFlights = (props: TFlightSearchParams) => {
     currentArrivalAirport?.Name || "",
   ];
 
-  // @todo get flights
-  availableFlights.value = [
-    {
-      id: "1",
-      airline: "KLM",
-      flightNumber: "KL598",
-      price: "100€",
-      departureDateTime: "2023-03-03T00:40",
-      arrivalDateTime: "2023-03-03T11:40",
-      departureAirport: currentDepartureAirport?.Name || "",
-      arrivalAirport: currentArrivalAirport?.Name || "",
-    },
-  ];
+  // @todo pass in parameters to filter with
+  getFlights().then((data) => {
+    availableFlights.value = data;
+  });
 };
 </script>
 

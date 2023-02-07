@@ -9,6 +9,14 @@ defineProps<{
   departureAirport: string;
   arrivalAirport: string;
 }>();
+
+const getDepartureDate = (dateTime: string) => {
+  return dateTime.split("T")[0];
+};
+
+const getDepartureTime = (dateTime: string) => {
+  return dateTime.split("T")[1];
+};
 </script>
 
 <template>
@@ -32,29 +40,19 @@ defineProps<{
         </span>
       </h2>
 
-      <h3>
-        <span
-          itemprop="provider"
-          itemscope
-          itemtype="http://schema.org/Provider"
-        >
-          {{ airline }}
-        </span>
-        flight <span itemprop="flightNumber">{{ flightNumber }}</span>
+      <h3 itemprop="provider" itemscope itemtype="http://schema.org/Provider">
+        {{ airline }}
       </h3>
 
-      <div>
-        <strong>Departure Time: </strong>
-        <time itemprop="departureTime" datetime="{{ departureDateTime }}">
-          {{ departureDateTime }}
+      <h4>
+        On {{ getDepartureDate(departureDateTime) }} at
+        <time
+          itemprop="departureTime"
+          datetime="{{ getDepartureTime(departureDateTime) }}"
+        >
+          {{ getDepartureTime(departureDateTime) }}
         </time>
-      </div>
-      <div>
-        <strong>Arrival Time: </strong>
-        <time itemprop="arrivalTime" datetime="{{ arrivalDateTime }}">
-          {{ arrivalDateTime }}
-        </time>
-      </div>
+      </h4>
     </div>
     <div class="price-column">
       <h4>
