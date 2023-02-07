@@ -80,3 +80,24 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
   - [x] Available airports
   - [x] Available flights given parameters
 - [] Add vue3-simple-typeahead instead of inputs for airport fields
+
+## Things I Would live to add but didn't get enough time to
+
+- Validation
+- Favicon
+- More styling
+- GeoLocation
+  - For translations and currency
+  - For selecting the departure airport
+- I18n
+- A working API
+  - This would open up many more locales
+- Support for return and multi-city flights
+
+### General comments
+
+I used vanilla Vue to highlight my understanding of the underlying HTML & CSS. Normally I would use a framework or a component library. This would've saved a lot of time and made the look and feel a bit better with less time spent styling things
+
+I wasted a lot of time looking for a data source. I settled on SkyScanner as it has an API that can be hooked up without changing the data structure the app expects
+
+This was a fun and challenging exercise. Thank you for taking the time to review it!
