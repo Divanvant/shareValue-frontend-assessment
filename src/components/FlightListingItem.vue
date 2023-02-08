@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getDate, getTime } from "@/utils";
+
 defineProps<{
   id: string;
   airline: string;
@@ -10,14 +12,6 @@ defineProps<{
   arrivalAirport: string;
   showBookButton?: boolean;
 }>();
-
-const getDepartureDate = (dateTime: string) => {
-  return dateTime.split("T")[0];
-};
-
-const getDepartureTime = (dateTime: string) => {
-  return dateTime.split("T")[1];
-};
 </script>
 
 <template>
@@ -50,12 +44,12 @@ const getDepartureTime = (dateTime: string) => {
       </h3>
 
       <h4>
-        On {{ getDepartureDate(departureDateTime) }} at
+        On {{ getDate(departureDateTime) }} at
         <time
           itemprop="departureTime"
           datetime="{{ getDepartureTime(departureDateTime) }}"
         >
-          {{ getDepartureTime(departureDateTime) }}
+          {{ getTime(departureDateTime) }}
         </time>
       </h4>
     </div>

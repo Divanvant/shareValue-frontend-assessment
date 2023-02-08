@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import type { TFlightSearchParams } from "@/types";
 import { getSupportedAirports } from "@/assets/skyscannerData";
+import { getDate } from "@/utils";
 
 const emit = defineEmits<{
   (e: "searchForFlights", props: TFlightSearchParams): void;
@@ -14,7 +15,7 @@ const flightSearchParams = ref<TFlightSearchParams>({
   numberOfPassengers: 1,
 });
 
-const currentDate = new Date().toISOString().split("T")[0];
+const currentDate = getDate(new Date().toISOString());
 const airports = getSupportedAirports();
 
 const flightSearch = () => {

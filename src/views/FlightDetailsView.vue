@@ -11,6 +11,7 @@ import {
 import { copy } from "@/translations";
 import { getFlights } from "@/assets/skyscannerData";
 import type { TFlightListing, TPassengerDetails } from "@/types";
+import { getDate } from "@/utils";
 
 const errorText = ref("");
 const flightId = ref("");
@@ -44,18 +45,16 @@ onMounted(() => {
   const arrivalAirport = searchParams.value.get("arrival") || "";
 
   if (flightId.value && departureDate) {
-    getFlights(
-      departureDate.split("T")[0],
-      departureAirport,
-      arrivalAirport
-    ).then((data) => {
-      const flight = data.find((flight) => flight.id == flightId.value);
+    getFlights(getDate(departureDate), departureAirport, arrivalAirport).then(
+      (data) => {
+        const flight = data.find((flight) => flight.id == flightId.value);
 
-      if (flight) {
-        setFlightDetails(flight);
-        flightRef.value = flight;
+        if (flight) {
+          setFlightDetails(flight);
+          flightRef.value = flight;
+        }
       }
-    });
+    );
     const savedPassengerDetails = getPassengerDetails();
 
     if (savedPassengerDetails) {

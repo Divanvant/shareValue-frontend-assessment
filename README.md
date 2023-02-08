@@ -85,7 +85,7 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
   - [x] Available flights given parameters
 - [ ] Add multi passenger support
 - [x] Add details to confirmation screen
-- [] Add vue3-simple-typeahead instead of inputs for airport fields
+- [ ] Add vue3-simple-typeahead instead of inputs for airport fields
 
 ## Things I would love to add but didn't get enough time to
 
