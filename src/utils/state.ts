@@ -5,7 +5,7 @@ export const setPassengerDetails = (passengerDetails: TPassengerDetails) => {
   sessionStorage.setItem("passengerDetails", data);
 };
 export const getPassengerDetails = () => {
-  const data = sessionStorage.getItem("passengerDetails") || "";
+  const data = sessionStorage.getItem("passengerDetails") || "{}";
   return JSON.parse(data);
 };
 export const clearPassengerDetails = () => {
@@ -17,7 +17,7 @@ export const setFlightDetails = (flightDetails: TFlightListing) => {
   sessionStorage.setItem("flightDetails", data);
 };
 export const getFlightDetails = () => {
-  const data = sessionStorage.getItem("flightDetails") || "";
+  const data = sessionStorage.getItem("flightDetails") || "{}";
   return JSON.parse(data);
 };
 export const clearFlightDetails = () => {
