@@ -7,6 +7,7 @@ This site is built with Vue 3 in Vite.
 ## Important note
 
 If you're struggling to find flights for your destination, check the data in the `public` folder to see which flight dates are available
+You can currently only book flights for 1 passenger even though the input allows you to add more
 
 ## Recommended IDE Setup
 
@@ -99,6 +100,7 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 - A working API
   - This would open up many more locales
 - Support for return and multi-city flights
+  - I had created the radio buttons for this but didn't commit the code as it wasn't functional
 - Add tests for utils etc.
 
 ### General comments
