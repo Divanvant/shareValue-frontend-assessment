@@ -32,6 +32,14 @@ export type TFlightListing = {
   arrivalAirport: string;
 };
 
+export type TPassengerDetails = {
+  passengerName: string;
+  passportNumber: string;
+  dateOfBirth: string;
+  phone: string;
+  email: string;
+};
+
 export type TSkyScannerQuote = {
   QuoteId: number;
   MinPrice: number;

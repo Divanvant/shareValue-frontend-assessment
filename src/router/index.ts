@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import("@/views/FlightConfirmationView.vue"),
     },
     {
+      path: "/flight-confirmed",
+      name: "flightConfirmed",
+      component: () => import("@/views/FlightConfirmedView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: () => import("@/views/NotFound.vue"),

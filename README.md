@@ -4,6 +4,10 @@
 
 This site is built with Vue 3 in Vite.
 
+## Important note
+
+If you're struggling to find flights for your destination, check the data in the `public` folder to see which flight dates are available
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
@@ -79,9 +83,11 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 - [x] Add dummy data
   - [x] Available airports
   - [x] Available flights given parameters
+- [ ] Add multi passenger support
+- [x] Add details to confirmation screen
 - [] Add vue3-simple-typeahead instead of inputs for airport fields
 
-## Things I Would live to add but didn't get enough time to
+## Things I would love to add but didn't get enough time to
 
 - Validation
 - Favicon
@@ -93,6 +99,7 @@ gets excited and spends 40 hours on it. Less is also possible, of course.
 - A working API
   - This would open up many more locales
 - Support for return and multi-city flights
+- Add tests for utils etc.
 
 ### General comments
 

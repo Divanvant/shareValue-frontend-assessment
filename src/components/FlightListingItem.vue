@@ -21,7 +21,11 @@ const getDepartureTime = (dateTime: string) => {
 </script>
 
 <template>
-  <div class="flight-listing" itemscope itemtype="http://schema.org/Flight">
+  <div
+    class="flight-listing text-left"
+    itemscope
+    itemtype="http://schema.org/Flight"
+  >
     <div>
       <h2 itemprop="name">
         <span

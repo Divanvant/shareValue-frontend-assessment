@@ -2,10 +2,15 @@
 import FlightListingItem from "@/components/FlightListingItem.vue";
 import { onMounted, ref } from "vue";
 import router from "@/router";
+import {
+  getPassengerDetails,
+  setFlightDetails,
+  setPassengerDetails,
+} from "@/utils/state";
 
 import { copy } from "@/translations";
 import { getFlights } from "@/assets/skyscannerData";
-import type { TFlightListing } from "@/types";
+import type { TFlightListing, TPassengerDetails } from "@/types";
 
 const errorText = ref("");
 const flightId = ref("");
@@ -21,7 +26,7 @@ const flightRef = ref<TFlightListing>({
   departureAirport: "",
   arrivalAirport: "",
 });
-const flightDetails = ref({
+const passengerDetails = ref<TPassengerDetails>({
   passengerName: "",
   passportNumber: "",
   dateOfBirth: "",
@@ -47,9 +52,15 @@ onMounted(() => {
       const flight = data.find((flight) => flight.id == flightId.value);
 
       if (flight) {
+        setFlightDetails(flight);
         flightRef.value = flight;
       }
     });
+    const savedPassengerDetails = getPassengerDetails();
+
+    if (savedPassengerDetails) {
+      passengerDetails.value = savedPassengerDetails;
+    }
   } else {
     console.log("show error");
   }
@@ -57,7 +68,7 @@ onMounted(() => {
 
 const confirmFlightDetails = () => {
   const { passengerName, passportNumber, dateOfBirth, phone, email } =
-    flightDetails.value;
+    passengerDetails.value;
   if (
     passengerName == "" ||
     passportNumber == "" ||
@@ -70,14 +81,10 @@ const confirmFlightDetails = () => {
   }
   errorText.value = "";
 
+  setPassengerDetails(passengerDetails.value);
+
   router.push({
-    path: `/flight-confirmation/${
-      flightId.value
-    }?departure=${searchParams.value?.get(
-      "departure"
-    )}&arrival=${searchParams.value?.get(
-      "arrival"
-    )}&departureDate=${searchParams.value?.get("departureDate")}`,
+    path: `/flight-confirmation/${flightId.value}`,
   });
 };
 </script>
@@ -115,7 +122,7 @@ const confirmFlightDetails = () => {
               type="text"
               name="passengerName"
               placeholder="Passenger Name"
-              v-model="flightDetails.passengerName"
+              v-model="passengerDetails.passengerName"
             />
           </label>
         </div>
@@ -128,7 +135,7 @@ const confirmFlightDetails = () => {
               type="text"
               name="passportNumber"
               placeholder="Passport Number"
-              v-model="flightDetails.passportNumber"
+              v-model="passengerDetails.passportNumber"
             />
           </label>
         </div>
@@ -142,7 +149,7 @@ const confirmFlightDetails = () => {
               id="dateOfBirth"
               type="date"
               name="dateOfBirth"
-              v-model="flightDetails.dateOfBirth"
+              v-model="passengerDetails.dateOfBirth"
             />
           </label>
         </div>
@@ -155,7 +162,7 @@ const confirmFlightDetails = () => {
               type="phone"
               name="phoneNumber"
               placeholder="Phone Number"
-              v-model="flightDetails.phone"
+              v-model="passengerDetails.phone"
             />
           </label>
         </div>
@@ -170,7 +177,7 @@ const confirmFlightDetails = () => {
               type="email"
               name="email"
               placeholder="Email address"
-              v-model="flightDetails.email"
+              v-model="passengerDetails.email"
             />
           </label>
         </div>

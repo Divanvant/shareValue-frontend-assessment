@@ -3,8 +3,8 @@
   --white: #f4f4f9;
   --primary-color: #b8dbd9;
   --primary-color-darker: #586f7c;
-  --secondary-color: #F4C095
-  --secondary-color-darker: #F5A869;
+  --secondary-color: #f4c095;
+  --secondary-color-darker: #f5a869;
   --spacing: 0.25rem;
 }
 
@@ -37,18 +37,43 @@ button,
   text-decoration: none;
 }
 
-button:hover, button:focus,
-.button:hover, .button:focus {
+button:hover,
+button:focus,
+.button:hover,
+.button:focus {
   background: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
-button:hover, .button:hover {
+button:hover,
+.button:hover {
   transform: translateY(-1px);
 }
 
-button:active, .button:active {
+button:active,
+.button:active {
   background: var(--primary-color-darker);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+button.secondary,
+.button.secondary {
+  background: var(--secondary-color);
+  color: var(--black);
+}
+
+button.secondary:hover,
+button.secondary:focus,
+.button.secondary:hover,
+.button.secondary:focus {
+  background: var(--secondary-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+button.secondary:active,
+.button.secondary:active {
+  background: var(--secondary-color-darker);
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   transform: translateY(0);
 }
@@ -80,6 +105,10 @@ select {
   border: 1px solid transparent;
 }
 
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 input:focus {
   border-color: var(--primary-color);
 }
@@ -97,11 +126,14 @@ input[type="radio"] {
 }
 
 .text-center {
-  text-align: center
+  text-align: center;
+}
+.text-left {
+  text-align: left;
 }
 
 .error {
-  color: red
+  color: red;
 }
 
 .page-wrapper {
@@ -121,10 +153,12 @@ input[type="radio"] {
     width: 100%;
     align-items: flex-start;
   }
-  input, select {
-    width: 100%
+  input,
+  select {
+    width: 100%;
   }
-  form button, form .button {
+  button,
+  .button {
     margin-top: calc(var(--spacing) * 4);
     width: 100%;
   }

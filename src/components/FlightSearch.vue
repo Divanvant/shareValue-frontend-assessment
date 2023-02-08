@@ -8,9 +8,9 @@ const emit = defineEmits<{
 }>();
 
 const flightSearchParams = ref<TFlightSearchParams>({
-  departureAirport: "CPT",
-  arrivalAirport: "AMS",
-  departureDate: "2023-02-07",
+  departureAirport: "",
+  arrivalAirport: "",
+  departureDate: "",
   numberOfPassengers: 1,
 });
 
@@ -18,12 +18,8 @@ const currentDate = new Date().toISOString().split("T")[0];
 const airports = getSupportedAirports();
 
 const flightSearch = () => {
-  const {
-    departureAirport,
-    arrivalAirport,
-    departureDate,
-    numberOfPassengers,
-  } = flightSearchParams.value;
+  const { departureAirport, arrivalAirport, departureDate } =
+    flightSearchParams.value;
 
   if (departureAirport === arrivalAirport) {
     alert("Please select different locations for your flight");
@@ -34,15 +30,6 @@ const flightSearch = () => {
     alert("Please select a date for your flight");
     return;
   }
-
-  // Search for available flights
-  console.log(
-    `Searching for flights from ${departureAirport} to ${arrivalAirport} on ${departureDate} for you${
-      numberOfPassengers > 1
-        ? " and " + (numberOfPassengers - 1) + " other"
-        : ""
-    }`
-  );
 
   emit("searchForFlights", flightSearchParams.value);
 };
